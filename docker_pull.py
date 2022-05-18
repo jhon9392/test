@@ -1,6 +1,7 @@
 import boto3
 import docker
 import logging
+import argparse
 
 #basic logging
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
@@ -28,5 +29,11 @@ def docker_pull(repository, tag):
     except Exception as e:
         logging.info('error while pulling docker image with exception: %s', e)
 
-#pass in s3 parameters        
-read_s3('', '', '')
+if __name__=="__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("bucket", type=str, help="Enter Bucket Name")
+    parser.add_argument("key", type=str, help="Enter key to download")
+    parser.add_argument("filepath", type=str, help="Enter file path to save object")
+    args = parser.parse_args()
+    read_s3(args.bucket, args.key, args.filepath)
+    
