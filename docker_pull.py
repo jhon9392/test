@@ -9,6 +9,7 @@ logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 def read_s3(bucket_name, key, file_path):
     
     #creating a resource representing Amazon Simple Storage Service (S3) Bucket
+    #TODO: write scenario specific exceptions
     s3 = boto3.resource('s3')
     #ref: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.download_file
     s3.Bucket(bucket_name).download_file(key, file_path)
